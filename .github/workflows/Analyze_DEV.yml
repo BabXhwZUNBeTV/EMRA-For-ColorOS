@@ -1,4 +1,4 @@
-name: EMRA For ColorOS_DEV_macOS
+name: EMRA For ColorOS_DEV
 
 on:
   workflow_dispatch:
@@ -20,25 +20,11 @@ on:
         description: "系统版本"
         required: false
 
-
 jobs:
   Analyze:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Install cygwin
-      uses: egor-tensin/setup-cygwin@v4
-
-    - name: Install scoop
-      uses: MinoruSekine/setup-scoop@v4
-      with:
-        apps: aria2 7zip git
-
-    - name: Install python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10' 
-        
     - name: Checkout code
       uses: actions/checkout@v4
     
@@ -52,7 +38,7 @@ jobs:
         repository: "ssut/payload-dumper-go"
         latest: true
         extract: true
-        fileName: "payload-dumper-go_*_windows_amd64.tar.gz"
+        fileName: "payload-dumper-go_*_linux_amd64.tar.gz"
 
     - name: Download extract.erofs
       uses: robinraju/release-downloader@v1.10
@@ -60,12 +46,12 @@ jobs:
         repository: "sekaiacg/erofs-utils"
         latest: true
         extract: true
-        fileName: "erofs-utils-*-Cygwin_x86_64-*.zip"
+        fileName: "erofs-utils-*-Linux_x86_64-*.zip"
 
-    - name: Remove file
+    - name: Set permission
       run: |
-       del *.tar.gz
-       del *.zip
+       chmod +x extract.erofs
+       rm *.tar.gz *.zip
 
     - name: Download ROM
       run: |
@@ -83,7 +69,11 @@ jobs:
     
     - name: Unzip file
       run: |
-        python main.py -f
+        ./extract.erofs -i my_product.img -x -T8
+        ./extract.erofs -i my_stock.img -x -T8
+        ./extract.erofs -i my_bigball.img -x -T8
+        ./extract.erofs -i my_heytap.img -x -T8
+        ./extract.erofs -i system_ext.img -x -T8
         rm *.img
     
     - name: Remove exclude apk
