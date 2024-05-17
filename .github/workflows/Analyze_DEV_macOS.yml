@@ -1,4 +1,4 @@
-name: EMRA For ColorOS_DEV
+name: EMRA For ColorOS_DEV_macOS
 
 on:
   workflow_dispatch:
