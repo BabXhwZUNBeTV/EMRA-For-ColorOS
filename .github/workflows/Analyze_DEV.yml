@@ -2,6 +2,24 @@ name: EMRA For ColorOS_DEV
 
 on:
   workflow_dispatch:
+    inputs:
+      link:
+        description: "ROM 链接"
+        required: true
+      push:
+        description: "上传数据库"
+        required: true
+        type: choice
+        options:
+        - "是"
+        - "否"
+      devicename:
+        description: "设备名"
+        required: false
+      osversion:
+        description: "系统版本"
+        required: false
+
 
 jobs:
   Analyze:
@@ -16,7 +34,7 @@ jobs:
       with:
         apps: aria2 7zip git
 
-    - name: Install scoop
+    - name: Install python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10' 
