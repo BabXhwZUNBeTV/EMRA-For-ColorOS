@@ -69,11 +69,7 @@ jobs:
     
     - name: Unzip file
       run: |
-        ./extract.erofs -i my_product.img -x -T8
-        ./extract.erofs -i my_stock.img -x -T8
-        ./extract.erofs -i my_bigball.img -x -T8
-        ./extract.erofs -i my_heytap.img -x -T8
-        ./extract.erofs -i system_ext.img -x -T8
+        python main.py -f
         rm *.img
     
     - name: Remove exclude apk
