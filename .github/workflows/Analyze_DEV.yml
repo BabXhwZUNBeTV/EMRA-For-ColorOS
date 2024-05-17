@@ -1,0 +1,26 @@
+name: EMRA For ColorOS_DEV
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Analyze:
+    runs-on: windows-latest
+
+    steps:
+    - name: Install cygwin
+      uses: egor-tensin/setup-cygwin@v4
+
+    - name: Install scoop
+      uses: MinoruSekine/setup-scoop@v4
+      with:
+        apps: aria2 7zip
+
+    - name: Install scoop
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+        
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
