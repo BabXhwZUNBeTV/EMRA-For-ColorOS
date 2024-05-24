@@ -77,7 +77,7 @@ def extract_files():
     try:
         # 使用 subprocess 模块运行 shell 命令，提取镜像文件中的文件
         # 使用 file 命令获取当前镜像打包格式
-        output = subprocess.check_output(["file", "my_product.img"])
+        output = subprocess.check_output(["file", "my_product.img"], text=True)
         print("当前镜像打包格式:", output)
         if "EROFS filesystem" in output:
             # 如果输出内容包含 EROFS filesystem 则使用 extract.erofs 解压
