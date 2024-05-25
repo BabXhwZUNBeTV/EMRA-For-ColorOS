@@ -115,8 +115,8 @@ jobs:
         git config --global user.name "${GITHUB_ACTOR}"
         git add app_version.json app_code.json
         if [ "${{ github.event.inputs.push }}" = "是" ]; then
-            git commit -m "Upload Database ${{ github.event.inputs.devicename }} ${{ github.event.inputs.osversion }}"
-            git push origin main
+            git commit -m "Database：Update ${{ github.event.inputs.devicename }} ${{ github.event.inputs.osversion }} by Actions"
+            git push
           elif [ "${{ github.event.inputs.push }}" = "否" ]; then
             exit 0
           else
