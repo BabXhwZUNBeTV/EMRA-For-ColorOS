@@ -315,6 +315,6 @@ def git_push():
     os_version = input("版本号：")
     commit_text = "Database：Update"
     commit = f"{commit_text} {device_name} {os_version}"
-    subprocess.run(["git", "add", "phone/"]) 
+    subprocess.run(["git", "add", "app_version.json", "app_code.json"]) 
     subprocess.run(["git", "commit","-m",commit]) 
     subprocess.run(["git", "push"]) 
