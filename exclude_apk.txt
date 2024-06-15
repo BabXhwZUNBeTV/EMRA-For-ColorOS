@@ -171,7 +171,6 @@ TrichromeLibrary64CN.apk
 TrichromeLibraryCN.apk
 UAFClient.apk
 uceShimService.apk
-UpgradeGuide.apk
 UPTsmService_01.01.08.apk
 UPTsmService_01.01.13.apk
 VDCService_plugin_PluginVdpGps.apk
