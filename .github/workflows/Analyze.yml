@@ -85,7 +85,7 @@ jobs:
       with:
         name: Special_apk
         path: |
-          output_apk/OplusLanuncher.apk
+          output_apk/OplusLauncher.apk
           output_apk/OppoGallery2.apk
           output_apk/PhoneManager.apk
                   
