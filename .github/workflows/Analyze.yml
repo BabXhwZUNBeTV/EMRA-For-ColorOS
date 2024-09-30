@@ -49,90 +49,90 @@ jobs:
         fileName: "erofs-utils-*-Linux_x86_64-*.zip"
 
     - name: Set permission
-跑:|
-chmod+x extract.erofs
-RM*.tar.gz*.zip
+      run: |
+       chmod +x extract.erofs
+       rm *.tar.gz *.zip
 
--姓名：下载ROM
-跑:|
-Python main.py-d"${{github.event.inputs.link}}"
+    - name: Download ROM
+      run: |
+        python main.py -d "${{ github.event.inputs.link }}"
 
--姓名：解压缩有效负载.bin
-跑:|
-Python main.py-p
-RM*.zip
+    - name: Unzip payload.bin
+      run: |
+        python main.py -p
+        rm *.zip
 
--姓名：解压缩img
-跑:|
-Python main.py-i
-RM payload.bin
+    - name: Unzip img
+      run: |
+        python main.py -i
+        rm payload.bin
     
--姓名:解压缩文件
-跑:|
-./extract.erofs-i my_product.img-x-T8
-./extract.erofs-i my_stock.img-x-T8
-./extract.erofs-i my_bigball.img-x-T8
-./extract.erofs-i my_hytap.img-x-T8
-./extract.erofs-i system_ext.img-x-T8
-RM*.img
+    - name: Unzip file
+      run: |
+        ./extract.erofs -i my_product.img -x -T8
+        ./extract.erofs -i my_stock.img -x -T8
+        ./extract.erofs -i my_bigball.img -x -T8
+        ./extract.erofs -i my_heytap.img -x -T8
+        ./extract.erofs -i system_ext.img -x -T8
+        rm *.img
     
--姓名：删除排除apk
-跑:|
-Python main.py-a
+    - name: Remove exclude apk
+      run: |
+        python main.py -a
 
--姓名：上传特殊apk
-uses：操作/上载工件@v4
-和……一起:
-姓名：special_apk
-路径:|
-output_apk/OplusLauncher.apk
-output_apk/OppoGallery2.apk
-output_apk/PhoneManager.apk
-output_apk/Battery.apk
-output_apk/NotificationCenter.apk
-output_apk/settings.apk
-output_apk/OplusAppPlatform.apk
-                  
--姓名:获取版本
-跑:|
-Python main.py-n
+    - name: Upload special apk
+      uses: actions/upload-artifact@v4
+      with:
+        name: Special_apk
+        path: |
+          output_apk/OplusLauncher.apk
+          output_apk/OppoGallery2.apk
+          output_apk/PhoneManager.apk
+          output_apk/Battery.apk
+          output_apk/NotificationCenter.apk
+          output_apk/Settings.apk
+          output_apk/OplusAppPlatform.apk
+          
+    - name: Get version
+      run: |
+        python main.py -n
 
--姓名:更新数据库
-跑:|
-Python main.py-u
+    - name: Update database
+      run: |
+        python main.py -u
 
--姓名:重命名
-跑:|
-Python main.py-m
+    - name: Rename
+      run: |
+        python main.py -m
 
--姓名:上传数据库
-uses：操作/上载工件@v4
-和……一起:
-姓名:数据库
-路径:|
-app_version.json
-app_code.json
+    - name: Upload database
+      uses: actions/upload-artifact@v4
+      with:
+        name: Database
+        path: |
+          app_version.json
+          app_code.json
     
--姓名：上传更新apk
-uses：操作/上载工件@v4
-和……一起:
-姓名：update_apk
-路径:|
-update_apk
-update_name_apk
+    - name: Upload update apk
+      uses: actions/upload-artifact@v4
+      with:
+        name: Update_apk
+        path: |
+          update_apk
+          update_name_apk
 
--姓名:推送数据库
-出错时继续:正确
-跑:|
-git配置-全局用户.电子邮件"${GITHUB_ACTOR}@users.noreply.github.com"
-git配置-全局用户名"${GitHub_ACTOR}”
-git添加app_version.json app_code.json
-如果["${{github.event.inputs.push}}"="是"]；然后
-git提交-m"数据库：按操作更新${{github.事件。输入。devicename}}${{github。事件。输入{\f2OSVersion}"
-git推送
-Elif["${{github.event.inputs.push}}"="否"]；然后
-退出0
-其他
-退出0
-Fi
+    - name: Push database
+      continue-on-error: true
+      run: |
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --global user.name "${GITHUB_ACTOR}"
+        git add app_version.json app_code.json
+        if [ "${{ github.event.inputs.push }}" = "是" ]; then
+            git commit -m "Database：Update ${{ github.event.inputs.devicename }} ${{ github.event.inputs.osversion }} by Actions"
+            git push
+          elif [ "${{ github.event.inputs.push }}" = "否" ]; then
+            exit 0
+          else
+            exit 0
+          fi
         
