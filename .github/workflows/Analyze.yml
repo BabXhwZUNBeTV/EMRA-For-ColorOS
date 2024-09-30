@@ -91,6 +91,7 @@ output_apk/PhoneManager.apk
 output_apk/Battery.apk
 output_apk/NotificationCenter.apk
 output_apk/settings.apk
+output_apk/OplusAppPlatform.apk
                   
 -姓名:获取版本
 跑:|
