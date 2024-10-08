@@ -3,7 +3,6 @@ import shutil  # 导入 shutil 模块，用于复制、移动、删除文件和�
 import subprocess  # 导入 subprocess 模块，用于执行系统命令
 import fnmatch  # 导入 fnmatch 模块，用于文件名匹配
 import json  # 导入 json 模块，用于读写 JSON 格式的数据
-import magic # 导入 magic 模块，用于读取 img 格式
 from pyaxmlparser import APK  # 导入 pyaxmlparser 读取 apk 信息
 
 
