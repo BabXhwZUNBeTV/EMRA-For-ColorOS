@@ -16,6 +16,7 @@ zip_files = glob.glob("*.zip")
 for root, dirs, files in os.walk("."):
             if "build.prop" in files:
                 build_prop_path = os.path.join(root, "build.prop")
+                shutil.copy(build_prop_path, "./build.prop")
 
 # 创建名为"output_apk"的目录（如果它不存在）
 output_dir = "output_apk"
@@ -35,9 +36,6 @@ if not os.path.exists(output_dir):
 
 # 获取名为"output_apk"目录中所有以".apk"为后缀的文件列表
 apk_files = [f for f in os.listdir(output_dir) if f.endswith(".apk")]
-
-# 复制"build.prop" 文件到根目录
-shutil.copy(build_prop_path, "./build.prop")
 
 # 外部工具路径
 tools_path_mapping = {
