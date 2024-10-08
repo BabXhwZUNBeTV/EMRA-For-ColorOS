@@ -16,7 +16,6 @@ zip_files = glob.glob("*.zip")
 for root, dirs, files in os.walk("."):
             if "build.prop" in files:
                 build_prop_path = os.path.join(root, "build.prop")
-                shutil.copy(build_prop_path, "./build.prop")
 
 # 创建名为"output_apk"的目录（如果它不存在）
 output_dir = "output_apk"
@@ -57,11 +56,11 @@ APK_CODE_NAME = "app_code_name.json"
 
 # 相关分区
 partitions = [
-              "my_product.img", 
-              "my_stock.img", 
-              "my_bigball.img", 
-              "my_heytap.img", 
-              "system_ext.img"
+              "my_product", 
+              "my_stock", 
+              "my_bigball", 
+              "my_heytap", 
+              "system_ext"
              ]
 for image in partitions:
     pass     
