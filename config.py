@@ -13,10 +13,14 @@ dst_dir = os.path.join(src_dir, "output_apk")
 zip_files = glob.glob("*.zip")
 
 # 在当前目录下搜索所有 "build.prop" 文件，并返回文件路径
-for root, dirs, files in os.walk("."):
-            if "build.prop" in files:
-                shutil.copy(os.path.join(root, "build.prop"), "./build.prop")
-                break
+for root, _, files in os.walk("."):
+    if "build.prop" in files:
+        src_path = os.path.join(root, "build.prop")
+        dest_path = "./build.prop"
+        
+        if os.path.abspath(src_path) != os.path.abspath(dest_path):
+            shutil.copy(src_path, dest_path)
+        break
 
 # 创建名为"output_apk"的目录（如果它不存在）
 output_dir = "output_apk"
